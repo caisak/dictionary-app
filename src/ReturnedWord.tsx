@@ -1,5 +1,8 @@
 import { DictionaryEntry } from "./DictionaryEntry";
 import styled from "styled-components";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlay } from '@fortawesome/free-solid-svg-icons';
+
 
 type ReturnedWordProps = {
   definition: DictionaryEntry | null;
@@ -24,7 +27,7 @@ function ReturnedWord({ definition }: ReturnedWordProps) {
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      Listen
+                      <FontAwesomeIcon icon={faPlay} />
                     </AudioLink>
                   )}
                 </PhoneticContainer>
@@ -44,7 +47,6 @@ function ReturnedWord({ definition }: ReturnedWordProps) {
                     {def.antonyms.length > 0 && (
                       <p>Antonyms: {def.antonyms.join(", ")}</p>
                     )}
-                    {def.example && <p>Example: {def.example}</p>}
                   </div>
                 ))}
                 {meaning.synonyms.length > 0 && (
@@ -93,7 +95,6 @@ const Container = styled.div`
   border-radius: 15px;
   max-width: 40rem;
   display: flex;
-  flex-direction: column;
   margin: 0 auto;
   margin-bottom: 1rem;
 
@@ -144,5 +145,6 @@ const PhoneticText = styled.span`
 `;
 
 const AudioLink = styled.a`
-  margin-left: 10px;
+  margin-left: 1rem;
+  color: var(--color-tech-blue);
 `;
