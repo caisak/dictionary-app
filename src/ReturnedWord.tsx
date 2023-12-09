@@ -134,6 +134,7 @@ const StyledLink = styled.a`
 const WordAndPhoneticContainer = styled.div`
   display: flex;
   align-items: baseline;
+  flex-wrap: wrap;
 `;
 
 const PhoneticContainer = styled.span`
