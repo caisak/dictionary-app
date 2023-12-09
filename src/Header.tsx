@@ -11,7 +11,7 @@ function Header () {
 export default Header;
 
 const Title = styled.h1`
-color: #2776ea;
+color: var(--color-tech-blue);
 display: flex;
 justify-content: center;
 align-items: center;

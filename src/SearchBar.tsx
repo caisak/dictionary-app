@@ -66,7 +66,7 @@ const StyledInput = styled.input`
   height: 3rem;
   width: 30rem;
   margin: 1rem;
-  border: 1px solid #2776ea;
+  border: 1px solid var(--color-tech-blue);
   box-shadow: none;
   outline: none;
   text-align: center;
@@ -87,7 +87,7 @@ const StyledButton = styled.button`
   border: none;
   box-shadow: none;
   outline: none;
-  background-color: #2776ea;
+  background-color: var(--color-tech-blue);
   color: white;
 
   &:hover {

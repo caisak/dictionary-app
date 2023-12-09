@@ -50,7 +50,7 @@ function ReturnedWord({ definition }: ReturnedWordProps) {
 export default ReturnedWord;
 
 const Container = styled.div`
-  border: 1px solid #2776ea;
+  border: 1px solid var(--color-tech-blue);
   border-radius: 15px;
   max-width: 40rem;
   display: flex;
