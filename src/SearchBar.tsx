@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { DictionaryEntry } from "./DictionaryEntry";
+import { useState } from "react";
 
 type SearchBarProps = {
   word: string;
@@ -8,6 +9,8 @@ type SearchBarProps = {
 };
 
 function SearchBar({ setWord, word, setDefinition }: SearchBarProps) {
+  const [error, setError] = useState('');
+
   async function searchWord(word: string) {
     try {
       const response = await fetch(
@@ -26,12 +29,19 @@ function SearchBar({ setWord, word, setDefinition }: SearchBarProps) {
 
   const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (!word.trim()) {
+      setError('Please enter a word to search!');
+      return;
+    }
+    setError('');
     await searchWord(word);
     setWord('');
   };
   
+  
 
   return (
+    <>
     <Container>
       <StyledForm onSubmit={handleFormSubmit}>
         <StyledInput
@@ -43,6 +53,8 @@ function SearchBar({ setWord, word, setDefinition }: SearchBarProps) {
         <StyledButton type="submit">Search</StyledButton>
       </StyledForm>
     </Container>
+    {error && <ErrorMessage>{error}</ErrorMessage>}
+    </>
   );
 }
 
@@ -99,3 +111,10 @@ const StyledButton = styled.button`
     width: 5rem;
   }
 `;
+
+const ErrorMessage = styled.p`
+  color: red;
+  display: flex;
+  justify-content: center;
+`;
+
