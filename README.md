@@ -1,10 +1,10 @@
-To run project type this in the terminal
-npm install
-npm run dev
+# Dictionary app
+This is a dictionary app that fetches information from the [Free Dictionary API](https://dictionaryapi.dev/)
 
-To run tests type this in the terminal
-npm test
+## Installation
+**To run project type this in the terminal**
+`npm install`
+`npm run dev`
 
-#Dictionary app
-This is a dictionary app that fetches information from this api:
-https://dictionaryapi.dev/
+**To run tests type this in the terminal**
+`npm test`
