@@ -32,7 +32,7 @@ function ReturnedWord({ definition }: ReturnedWordProps) {
                     {phonetic.audio && (
                       <>
                       <audio ref={audioRef} src={phonetic.audio} style={{ display: 'none' }}></audio>
-                      <AudioButton onClick={() => playAudio(phonetic.audio)}>
+                      <AudioButton data-testid="audio-link" onClick={() => playAudio(phonetic.audio)}>
                         <FontAwesomeIcon icon={faPlay} />
                       </AudioButton>
                     </>
