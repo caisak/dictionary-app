@@ -8,6 +8,8 @@ type SearchBarProps = {
   setDefinition: React.Dispatch<React.SetStateAction<DictionaryEntry | null>>;
 };
 
+//This component renders the search bar and handles the form submit.
+//It also renders an error message if the user tries to submit an empty search.
 function SearchBar({ setWord, word, setDefinition }: SearchBarProps) {
   const [error, setError] = useState('');
 
@@ -60,6 +62,7 @@ function SearchBar({ setWord, word, setDefinition }: SearchBarProps) {
 
 export default SearchBar;
 
+//Styling for this component
 const Container = styled.div`
   display: flex;
   align-items: center;

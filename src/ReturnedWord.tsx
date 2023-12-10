@@ -10,12 +10,19 @@ type ReturnedWordProps = {
 
 function ReturnedWord({ definition }: ReturnedWordProps) {
   const audioRef = useRef<HTMLAudioElement>(null);
+
+  //Function to play audio when the play button is clicked
   const playAudio = (audioUrl: string) => {
     if (audioRef.current) {
       audioRef.current.src = audioUrl;
       audioRef.current.play();
     }
   };
+
+  //This component renders the word, phonetics, meanings, license, and source URLs.
+  //It renders the elements that are returned from the API call.
+  //The elements are rendered conditionally based on whether or not they exist.
+  //It also renders the audio button and plays the audio when the button is clicked.
   return (
     <>
       <Container>
@@ -98,6 +105,7 @@ function ReturnedWord({ definition }: ReturnedWordProps) {
 
 export default ReturnedWord;
 
+//Styling for this component
 const Container = styled.div`
   border: 1px solid var(--color-tech-blue);
   border-radius: 15px;

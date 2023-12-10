@@ -3,6 +3,11 @@ import SearchBar from '../SearchBar';
 import { useState } from 'react';
 import { vi } from 'vitest';
 
+//This tests the search bar component.
+//It tests that the input value updates when typing.
+//It tests that the error message is displayed when the form is submitted with empty input.
+//It tests that the error message is not displayed when a valid word is submitted.
+
 describe('SearchBar Component', () => {
   it('should display an error message when form is submitted with empty input', () => {
     render(<SearchBar word="" setWord={() => {}} setDefinition={() => {}} />);

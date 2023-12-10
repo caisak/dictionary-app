@@ -1,5 +1,6 @@
 import styled from "styled-components";
 
+//This component renders the header.
 function Header () {
     return (
         <div>
@@ -10,6 +11,7 @@ function Header () {
 
 export default Header;
 
+//Styling for this component
 const Title = styled.h1`
 display: flex;
 justify-content: center;
