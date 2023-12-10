@@ -1,91 +1,98 @@
 import { DictionaryEntry } from "./DictionaryEntry";
 import styled from "styled-components";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlay } from '@fortawesome/free-solid-svg-icons';
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlay } from "@fortawesome/free-solid-svg-icons";
+import { useRef } from "react";
 
 type ReturnedWordProps = {
   definition: DictionaryEntry | null;
 };
 
 function ReturnedWord({ definition }: ReturnedWordProps) {
+  const audioRef = useRef<HTMLAudioElement>(null);
+  const playAudio = (audioUrl: string) => {
+    if (audioRef.current) {
+      audioRef.current.src = audioUrl;
+      audioRef.current.play();
+    }
+  };
   return (
-    <Container>
-      <TextContainer>
-        {definition ? (
-          <div>
-            <WordAndPhoneticContainer>
-              <h2>{definition.word}</h2>
-              {definition.phonetics.map((phonetic, index) => (
-                <PhoneticContainer key={index}>
-                  {phonetic.text && (
-                    <PhoneticText>{phonetic.text}</PhoneticText>
-                  )}
-                  {phonetic.audio && (
-                    <AudioLink
-                    data-testid="audio-link"
-                      href={phonetic.audio}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <FontAwesomeIcon icon={faPlay} />
-                    </AudioLink>
-                  )}
-                </PhoneticContainer>
-              ))}
-            </WordAndPhoneticContainer>
-            {definition.meanings.map((meaning, index) => (
-              <div key={index}>
-                <BlueText>{meaning.partOfSpeech}</BlueText>
-                {meaning.definitions.map((def, defIndex) => (
-                  <div key={defIndex}>
-                    <StyledList>
-                      <li>{def.definition}</li>
-                    </StyledList>
-                    {def.synonyms.length > 0 && (
-                      <p>Synonyms: {def.synonyms.join(", ")}</p>
+    <>
+      <Container>
+        <TextContainer>
+          {definition ? (
+            <div>
+              <WordAndPhoneticContainer>
+                <h2>{definition.word}</h2>
+                {definition.phonetics.map((phonetic, index) => (
+                  <PhoneticContainer key={index}>
+                    {phonetic.text && (
+                      <PhoneticText>{phonetic.text}</PhoneticText>
                     )}
-                    {def.antonyms.length > 0 && (
-                      <p>Antonyms: {def.antonyms.join(", ")}</p>
+                    {phonetic.audio && (
+                      <>
+                      <audio ref={audioRef} src={phonetic.audio} style={{ display: 'none' }}></audio>
+                      <AudioButton onClick={() => playAudio(phonetic.audio)}>
+                        <FontAwesomeIcon icon={faPlay} />
+                      </AudioButton>
+                    </>
                     )}
-                  </div>
+                  </PhoneticContainer>
                 ))}
-                {meaning.synonyms.length > 0 && (
-                  <p>Synonyms: {meaning.synonyms.join(", ")}</p>
-                )}
-                {meaning.antonyms.length > 0 && (
-                  <p>Antonyms: {meaning.antonyms.join(", ")}</p>
-                )}
-              </div>
-            ))}
-            {definition.license && (
-              <Text>
-                License:{" "}
+              </WordAndPhoneticContainer>
+              {definition.meanings.map((meaning, index) => (
+                <div key={index}>
+                  <BlueText>{meaning.partOfSpeech}</BlueText>
+                  {meaning.definitions.map((def, defIndex) => (
+                    <div key={defIndex}>
+                      <StyledList>
+                        <li>{def.definition}</li>
+                      </StyledList>
+                      {def.synonyms.length > 0 && (
+                        <p>Synonyms: {def.synonyms.join(", ")}</p>
+                      )}
+                      {def.antonyms.length > 0 && (
+                        <p>Antonyms: {def.antonyms.join(", ")}</p>
+                      )}
+                    </div>
+                  ))}
+                  {meaning.synonyms.length > 0 && (
+                    <p>Synonyms: {meaning.synonyms.join(", ")}</p>
+                  )}
+                  {meaning.antonyms.length > 0 && (
+                    <p>Antonyms: {meaning.antonyms.join(", ")}</p>
+                  )}
+                </div>
+              ))}
+              {definition.license && (
+                <Text>
+                  License:{" "}
+                  <StyledLink
+                    href={definition.license.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {definition.license.name}
+                  </StyledLink>
+                </Text>
+              )}
+              {definition.sourceUrls.map((url, index) => (
                 <StyledLink
-                  href={definition.license.url}
+                  key={index}
+                  href={url}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  {definition.license.name}
+                  {url}
                 </StyledLink>
-              </Text>
-            )}
-            {definition.sourceUrls.map((url, index) => (
-              <StyledLink
-                key={index}
-                href={url}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {url}
-              </StyledLink>
-            ))}
-          </div>
-        ) : (
-          <p>No word found</p>
-        )}
-      </TextContainer>
-    </Container>
+              ))}
+            </div>
+          ) : (
+            <p>No word found</p>
+          )}
+        </TextContainer>
+      </Container>
+    </>
   );
 }
 
@@ -146,7 +153,11 @@ const PhoneticText = styled.span`
   font-size: 14px;
 `;
 
-const AudioLink = styled.a`
+const AudioButton = styled.button`
   margin-left: 1rem;
   color: var(--color-tech-blue);
+  border: none;
+  box-shadow: none;
+  outline: none;
+  background-color: transparent;
 `;
