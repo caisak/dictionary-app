@@ -12,7 +12,7 @@ describe('SearchBar Component', () => {
 
     expect(screen.getByText('Please enter a word to search!')).toBeInTheDocument();
   });
-});
+
 
 it('should update the input value when typing', () => {
   const TestComponent = () => {
@@ -41,4 +41,5 @@ it('should display an error message when form is submitted with empty input', ()
   fireEvent.click(submitButton);
 
   expect(screen.getByText('Please enter a word to search!')).toBeInTheDocument();
+});
 });

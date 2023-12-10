@@ -23,6 +23,7 @@ function ReturnedWord({ definition }: ReturnedWordProps) {
                   )}
                   {phonetic.audio && (
                     <AudioLink
+                    data-testid="audio-link"
                       href={phonetic.audio}
                       target="_blank"
                       rel="noopener noreferrer"
