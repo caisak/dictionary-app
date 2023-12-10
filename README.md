@@ -8,3 +8,6 @@ This is a dictionary app that fetches information from the [Free Dictionary API]
 
 **To run tests type this in the terminal**
 `npm test`
+
+## Open in browser
+[View project in browser](https://caisasdictionary.netlify.app/)
